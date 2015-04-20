@@ -8,8 +8,9 @@ $connect = new FacebookConnect(APP_ID, APP_SECRET);
 
 $user = $connect->connect(REDIRECT_URL);
 
-if($user != null || $user!= false ){
+if(is_string($user)){
     echo '<a href="'.$user.'">Se connecter avec facebook</a>';
+    echo $user;
 }else{
     $response = $connect->getResponse();
     var_dump($response);
