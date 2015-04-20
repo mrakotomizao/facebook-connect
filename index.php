@@ -6,7 +6,7 @@ require 'vendor/autoload.php';
 
 $connect = new FacebookConnect(APP_ID, APP_SECRET);
 
-$user = $connect->connect(USER_HOST);
+$user = $connect->connect(REDIRECT_URL);
 echo "here";
 if(is_string($user)){
 
