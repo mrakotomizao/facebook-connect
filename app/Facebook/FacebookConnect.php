@@ -18,15 +18,12 @@ class FacebookConnect {
     private $appSecret;
 
     function __construct($appid, $appsecret){
-
-        $this->appId = $appid;
-        $this->appSecret = $appsecret;
-
+        FacebookSession::setDefaultApplication($appid, $appsecret);
+        echo "init done";
     }
 
     public  function connect($redirectUrl){
 
-        FacebookSession::setDefaultApplication($this->appId, $this->appSecret);
         $helper = new FacebookRedirectLoginHelper($redirectUrl);
 
         //si la var session existe et que l'on un un fb token en session
@@ -46,6 +43,7 @@ class FacebookConnect {
 
             try{
                 //génération du token
+                echo "\n trying too connect";
                 $_SESSION['fb_token'] = $session->getToken();
                 var_dump($session);
 
@@ -57,10 +55,10 @@ class FacebookConnect {
 
                 //facebook id
                 $facebookId = $response->getId();
-
+                echo "connection done";
                 //image profil du user
-                $imgProfile = '<img src="//graph.facebook.com/'.$facebookId.'/picture">';
-                echo $imgProfile;
+                /*$imgProfile = '<img src="//graph.facebook.com/'.$facebookId.'/picture">';
+                echo $imgProfile;*/
 
 
                 //si le user a refuser la permission de recupération du mail
@@ -71,10 +69,10 @@ class FacebookConnect {
                 return $response;
 
             }catch (Exception $e){
+                echo "problem with the token";
+                unset($_SESSION['fb_token']);
 
-                    unset($_SESSION['fb_token']);
-
-                    return $helper->getReRequestUrl(['email']);
+                return $helper->getReRequestUrl(['email']);
 
             }
 
@@ -93,7 +91,7 @@ class FacebookConnect {
 
         }else{
 
-                return $helper->getReRequestUrl(['email']);
+            return $helper->getReRequestUrl(['email']);
 
         }
     }
