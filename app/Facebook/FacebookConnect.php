@@ -90,7 +90,7 @@ class FacebookConnect {
 
 
         }else{
-
+            echo "nothing";
             return $helper->getReRequestUrl(['email']);
 
         }
