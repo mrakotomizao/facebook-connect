@@ -5,6 +5,6 @@
  * Date: 20/04/2015
  * Time: 23:09
  */
-define('APP_ID','1374336012897003');
-define('APP_SECRET','4f30d40e554776ebc1aa328683d9178e');
+define('APP_ID','1631679237055563');
+define('APP_SECRET','81ec70f0f0c5c3671b1cb22acc15c091');
 define('USER_HOST','http://localhost/');
