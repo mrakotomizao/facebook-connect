@@ -22,8 +22,11 @@ class FacebookConnect {
 
         $helper = new FacebookRedirectLoginHelper($redirectUrl);
         //si la var session existe et que l'on un un fb token en session
+    }
+    public function getResponse(){
         if(isset($_SESSION) && isset($_SESSION['fb_token'])){
             //on récupère la session active
+            echo "j'ai une session";
             $session = new FacebookSession($_SESSION['fb_token']);
 
         }else{

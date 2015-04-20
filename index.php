@@ -7,15 +7,12 @@ require 'vendor/autoload.php';
 $connect = new FacebookConnect(APP_ID, APP_SECRET);
 
 $user = $connect->connect(REDIRECT_URL);
-echo $user;
-if(is_string($user)){
 
+if(user != null || $user!= false ){
     echo '<a href="'.$user.'">Se connecter avec facebook</a>';
-
 }else{
-    echo "hello there ";
-    var_dump($user);
-
+    $response = $connect->getResponse();
+    var_dump($response);
 }
 
 
