@@ -13,40 +13,40 @@ use Facebook\FacebookSession;
 use Facebook\FacebookRequest;
 
 class FacebookConnect {
+    private $session;
 
     function __construct($appid, $appsecret){
         FacebookSession::setDefaultApplication($appid, $appsecret);
+        $this->session = "";
     }
 
     public  function connect($redirectUrl){
 
         $helper = new FacebookRedirectLoginHelper($redirectUrl);
         //si la var session existe et que l'on un un fb token en session
-    }
-    public function getResponse(){
         if(isset($_SESSION) && isset($_SESSION['fb_token'])){
             //on récupère la session active
             echo "j'ai une session";
-            $session = new FacebookSession($_SESSION['fb_token']);
+            $this->session = new FacebookSession($_SESSION['fb_token']);
 
         }else{
 
             //on récupère le token de connexion
-            $session = $helper->getSessionFromRedirect();
+            $this->session = $helper->getSessionFromRedirect();
 
         }
 
         //si on a une session
-        if($session){
+        if($this->session){
             echo "got session";
             try{
                 //génération du token
                 echo "\n trying too connect";
-                $_SESSION['fb_token'] = $session->getToken();
-                var_dump($session);
+                $_SESSION['fb_token'] = $this->session->getToken();
+                var_dump($this->session);
 
                 //si on a bien notre token de connexion on peut commencer à faire des requetes avec la classe facebookrequest
-                $request = new FacebookRequest($session, 'GET', '/me');
+                $request = new FacebookRequest($this->session, 'GET', '/me');
                 //on recupère un objet graph user
                 $response = $request->execute()->getGraphObject('Facebook\GraphUser');
                 //var_dump($response);
