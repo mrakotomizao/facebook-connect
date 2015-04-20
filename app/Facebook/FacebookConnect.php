@@ -14,18 +14,14 @@ use Facebook\FacebookRequest;
 
 class FacebookConnect {
 
-    private $appId;
-    private $appSecret;
-
     function __construct($appid, $appsecret){
         FacebookSession::setDefaultApplication($appid, $appsecret);
-        echo "init done";
     }
 
     public  function connect($redirectUrl){
 
         $helper = new FacebookRedirectLoginHelper($redirectUrl);
-
+        var_dump($helper);
         //si la var session existe et que l'on un un fb token en session
         if(isset($_SESSION) && isset($_SESSION['fb_token'])){
             //on récupère la session active
