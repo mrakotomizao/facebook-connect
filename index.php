@@ -13,7 +13,7 @@ if(is_string($user)){
     echo '<a href="'.$user.'">Se connecter avec facebook</a>';
 
 }else{
-
+    echo "hello there ";
     var_dump($user);
 
 }
