@@ -36,7 +36,7 @@ class FacebookConnect {
 
         //si on a une session
         if($session){
-
+            echo "got session";
             try{
                 //génération du token
                 echo "\n trying too connect";
